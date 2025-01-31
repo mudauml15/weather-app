@@ -8,6 +8,8 @@
 
 body {
   font-family: "Poppins", serif;
+  @apply bg-[#1E1E1E] text-white;
+
 }
 
 @layer base {
