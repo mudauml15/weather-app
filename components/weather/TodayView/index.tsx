@@ -1,7 +1,7 @@
 "use client";
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import useEmblaCarousel from 'embla-carousel-react';
+import useEmblaCarousel from "embla-carousel-react";
 import { WeatherCard } from "./WeatherCard";
 import { TimelineCard } from "./TimelineCard";
 
@@ -11,7 +11,10 @@ interface TodayViewProps {
 
 export function TodayView({ unit }: TodayViewProps) {
   const [mainCarouselRef, mainCarouselApi] = useEmblaCarousel();
-  const [timelineCarouselRef] = useEmblaCarousel({ dragFree: true, containScroll: "trimSnaps" });
+  const [timelineCarouselRef] = useEmblaCarousel({
+    dragFree: true,
+    containScroll: "trimSnaps",
+  });
 
   const locations = [
     { city: "Burdwan", temp: "27", icon: "☁️", date: "Aug 23, Tue" },
@@ -31,10 +34,10 @@ export function TodayView({ unit }: TodayViewProps) {
 
   return (
     <>
-      <div className="grid grid-cols-[auto_1fr_auto] gap-4">
-        <button 
+      <div className="grid grid-cols-[auto_1fr_auto] gap-14">
+        <button
           onClick={() => mainCarouselApi?.scrollPrev()}
-          className="flex h-full items-center justify-center rounded-xl bg-emerald-500 px-4 hover:bg-emerald-600 transition-colors"
+          className="flex h-full items-center justify-center rounded-xl bg-gradient-to-br from-emerald-600 to-teal-700 px-5 hover:bg-emerald-600 transition-colors"
         >
           <ChevronLeft className="h-8 w-8" />
         </button>
@@ -49,9 +52,9 @@ export function TodayView({ unit }: TodayViewProps) {
           </div>
         </div>
 
-        <button 
+        <button
           onClick={() => mainCarouselApi?.scrollNext()}
-          className="flex h-full items-center justify-center rounded-xl bg-emerald-500 px-4 hover:bg-emerald-600 transition-colors"
+          className="flex h-full items-center justify-center rounded-xl bg-gradient-to-br from-emerald-600 to-teal-700 px-5 hover:bg-emerald-600 transition-colors"
         >
           <ChevronRight className="h-8 w-8" />
         </button>
