@@ -12,8 +12,8 @@ export default function Home() {
   const [activeView, setActiveView] = useState("today");
 
   return (
-    <main className="min-h-screen bg-zinc-900 p-4 text-white">
-      <div className="mx-auto max-w-6xl">
+    <main className="h-screen bg-zinc-900 text-white flex flex-col">
+      <div className="flex-1 flex flex-col">
         <Header
           activeView={activeView}
           setActiveView={setActiveView}
