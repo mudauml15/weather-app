@@ -1,15 +1,12 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import useEmblaCarousel from "embla-carousel-react";
+import useEmblaCarousel from 'embla-carousel-react';
 import { WeatherCard } from "./WeatherCard";
 import { TimelineCard } from "./TimelineCard";
-import {
-  getWeatherByCity,
-  getForecast,
-  type WeatherData,
-  type ForecastData,
-} from "@/lib/weather";
+import { getWeatherByCity, getForecast, type WeatherData, type ForecastData } from "@/lib/weather";
+
 interface TodayViewProps {
   unit: string;
 }
@@ -21,8 +18,10 @@ export function TodayView({ unit }: TodayViewProps) {
   const [timelineData, setTimelineData] = useState<ForecastData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [selectedCity, setSelectedCity] = useState("Pretoria,ZA");
 
-  const cities = ["London", "New York", "Tokyo"];
+  const cities = ["Pretoria,ZA", "Johannesburg,ZA", "Durban,ZA"];
+  const cityDisplayNames = ["Pretoria", "Johannesburg", "Durban"];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,10 +32,17 @@ export function TodayView({ unit }: TodayViewProps) {
         // Fetch weather for all cities
         const weatherPromises = cities.map(city => getWeatherByCity(city, unit));
         const weatherResults = await Promise.all(weatherPromises);
-        setWeatherData(weatherResults);
+        
+        // Update the city names to display names
+        const formattedResults = weatherResults.map((data, index) => ({
+          ...data,
+          city: cityDisplayNames[index]
+        }));
+        
+        setWeatherData(formattedResults);
 
-        // Fetch timeline for the first city
-        const timelineResult = await getForecast(cities[0], unit);
+        // Fetch timeline for the selected city
+        const timelineResult = await getForecast(selectedCity, unit);
         setTimelineData(timelineResult);
       } catch (err) {
         setError("Failed to fetch weather data. Please try again later.");
@@ -46,7 +52,21 @@ export function TodayView({ unit }: TodayViewProps) {
     };
 
     fetchData();
-  }, [unit]);
+  }, [unit, selectedCity]);
+
+  const handleSlideChange = () => {
+    const currentSlide = mainCarouselApi?.selectedScrollSnap() || 0;
+    setSelectedCity(cities[currentSlide]);
+  };
+
+  useEffect(() => {
+    if (mainCarouselApi) {
+      mainCarouselApi.on('select', handleSlideChange);
+      return () => {
+        mainCarouselApi.off('select', handleSlideChange);
+      };
+    }
+  }, [mainCarouselApi]);
 
   if (loading) {
     return (

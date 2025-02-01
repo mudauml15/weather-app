@@ -14,7 +14,7 @@ export function MonthlyView() {
       try {
         setLoading(true);
         setError(null);
-        const data = await getDailyForecast("London");
+        const data = await getDailyForecast("Pretoria,ZA");
         setMonthlyForecast(data);
       } catch (err) {
         setError("Failed to fetch forecast data. Please try again later.");
