@@ -3,12 +3,14 @@ import { Input } from "@/components/ui/input";
 
 export function SearchBar() {
   return (
-    <div className="relative mb-8">
-      <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" />
-      <Input
-        className="w-full bg-zinc-800 border-none pl-10 text-white placeholder:text-zinc-400"
-        placeholder="Search location..."
-      />
+    <div className="relative p-4 flex justify-center bg-[#1E1E1E]">
+      <div className="relative w-full max-w-5xl">
+        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 z-10" />
+        <Input
+          className="w-full bg-white border-none pl-12 text-zinc-900 placeholder:text-zinc-500 rounded-3xl h-12"
+          placeholder="Search location..."
+        />
+      </div>
     </div>
   );
 }

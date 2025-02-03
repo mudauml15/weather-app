@@ -9,12 +9,18 @@ interface HeaderProps {
   setUnit: (unit: string) => void;
 }
 
-export function Header({ activeView, setActiveView, unit, setUnit }: HeaderProps) {
+export function Header({
+  activeView,
+  setActiveView,
+  unit,
+  setUnit,
+}: HeaderProps) {
   return (
-    <div className="flex items-center justify-between mb-8">
+    <div className="flex items-center justify-between mb-8 bg-[#1E1E1E] mt-10 mx-5">
       <div className="flex items-center gap-2">
-        <div className="text-2xl font-bold">WeatherMe</div>
-        <div className="text-sm text-zinc-400">21:00 pm</div>
+        <div className="text-5xl ">WeatherMe </div>
+
+        <div className="text-2xl text-zinc-400">21:00 pm</div>
       </div>
       <nav className="flex gap-8">
         {["today", "tomorrow", "monthly"].map((view) => (
@@ -22,23 +28,14 @@ export function Header({ activeView, setActiveView, unit, setUnit }: HeaderProps
             key={view}
             onClick={() => setActiveView(view)}
             className={`pb-1 capitalize ${
-              activeView === view
-                ? "border-b-2 border-white"
-                : "text-zinc-400"
+              activeView === view ? "border-b-2 border-white" : "text-zinc-400"
             }`}
           >
             {view === "monthly" ? "Monthly Forecast" : view}
           </button>
         ))}
       </nav>
-      <div className="flex items-center gap-2">
-        <span>°C</span>
-        <Switch
-          checked={unit === "F"}
-          onCheckedChange={(checked) => setUnit(checked ? "F" : "C")}
-        />
-        <span>°F</span>
-      </div>
+      <div className="flex items-center gap-2"></div>
     </div>
   );
 }

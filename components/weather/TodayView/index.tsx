@@ -2,10 +2,15 @@
 
 import { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import useEmblaCarousel from 'embla-carousel-react';
+import useEmblaCarousel from "embla-carousel-react";
 import { WeatherCard } from "./WeatherCard";
 import { TimelineCard } from "./TimelineCard";
-import { getWeatherByCity, getForecast, type WeatherData, type ForecastData } from "@/lib/weather";
+import {
+  getWeatherByCity,
+  getForecast,
+  type WeatherData,
+  type ForecastData,
+} from "@/lib/weather";
 
 interface TodayViewProps {
   unit: string;
@@ -13,7 +18,10 @@ interface TodayViewProps {
 
 export function TodayView({ unit }: TodayViewProps) {
   const [mainCarouselRef, mainCarouselApi] = useEmblaCarousel();
-  const [timelineCarouselRef] = useEmblaCarousel({ dragFree: true, containScroll: "trimSnaps" });
+  const [timelineCarouselRef] = useEmblaCarousel({
+    dragFree: true,
+    containScroll: "trimSnaps",
+  });
   const [weatherData, setWeatherData] = useState<WeatherData[]>([]);
   const [timelineData, setTimelineData] = useState<ForecastData[]>([]);
   const [loading, setLoading] = useState(true);
@@ -30,15 +38,17 @@ export function TodayView({ unit }: TodayViewProps) {
         setError(null);
 
         // Fetch weather for all cities
-        const weatherPromises = cities.map(city => getWeatherByCity(city, unit));
+        const weatherPromises = cities.map((city) =>
+          getWeatherByCity(city, unit)
+        );
         const weatherResults = await Promise.all(weatherPromises);
-        
+
         // Update the city names to display names
         const formattedResults = weatherResults.map((data, index) => ({
           ...data,
-          city: cityDisplayNames[index]
+          city: cityDisplayNames[index],
         }));
-        
+
         setWeatherData(formattedResults);
 
         // Fetch timeline for the selected city
@@ -61,9 +71,9 @@ export function TodayView({ unit }: TodayViewProps) {
 
   useEffect(() => {
     if (mainCarouselApi) {
-      mainCarouselApi.on('select', handleSlideChange);
+      mainCarouselApi.on("select", handleSlideChange);
       return () => {
-        mainCarouselApi.off('select', handleSlideChange);
+        mainCarouselApi.off("select", handleSlideChange);
       };
     }
   }, [mainCarouselApi]);
@@ -86,12 +96,12 @@ export function TodayView({ unit }: TodayViewProps) {
 
   return (
     <div className="h-full flex flex-col">
-      <div className="flex-1 grid grid-cols-[auto_1fr_auto] gap-4 p-4">
-        <button 
+      <div className="flex-1 grid grid-cols-[auto_1fr_auto] gap-40 p-4">
+        <button
           onClick={() => mainCarouselApi?.scrollPrev()}
-          className="flex items-center justify-center rounded-xl bg-emerald-500 px-4 hover:bg-emerald-600 transition-colors"
+          className="flex items-center justify-center rounded-xl bg-gradient-to-r from-[#077989] to-[#10C99C] px-20 transition-colors"
         >
-          <ChevronLeft className="h-8 w-8" />
+          <ChevronLeft className="h-12 w-12    text-black" />
         </button>
 
         <div className="overflow-hidden" ref={mainCarouselRef}>
@@ -104,11 +114,11 @@ export function TodayView({ unit }: TodayViewProps) {
           </div>
         </div>
 
-        <button 
+        <button
           onClick={() => mainCarouselApi?.scrollNext()}
-          className="flex items-center justify-center rounded-xl bg-emerald-500 px-4 hover:bg-emerald-600 transition-colors"
+          className="flex items-center justify-center rounded-xl bg-gradient-to-r from-[#077989] to-[#10C99C] px-20 transition-colors"
         >
-          <ChevronRight className="h-8 w-8" />
+          <ChevronRight className="h-12 w-12   text-black " />
         </button>
       </div>
 
