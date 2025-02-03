@@ -22,13 +22,15 @@ export function Header({
 
         <div className="text-2xl text-zinc-400">21:00 pm</div>
       </div>
-      <nav className="flex gap-8">
+      <nav className="flex gap-8 text-2xl ">
         {["today", "tomorrow", "monthly"].map((view) => (
           <button
             key={view}
             onClick={() => setActiveView(view)}
             className={`pb-1 capitalize ${
-              activeView === view ? "border-b-2 border-white" : "text-zinc-400"
+              activeView === view
+                ? "border-b-2 border-white font-bold"
+                : "text-zinc-400 font-normal "
             }`}
           >
             {view === "monthly" ? "Monthly Forecast" : view}
