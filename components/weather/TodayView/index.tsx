@@ -96,14 +96,18 @@ export function TodayView({ unit }: TodayViewProps) {
 
   return (
     <div className="h-full flex flex-col">
-      <div className="flex-1 grid grid-cols-[auto_1fr_auto] gap-40 p-4">
+    
+      <div className="flex-1 grid grid-cols-1 md:grid-cols-[auto_1fr_auto] gap-4 sm:gap-6 md:gap-8 p-2 sm:p-4">
+  
         <button
           onClick={() => mainCarouselApi?.scrollPrev()}
-          className="flex items-center justify-center rounded-xl bg-gradient-to-r from-[#077989] to-[#10C99C] px-20 transition-colors"
+          className="hidden md:flex items-center justify-center rounded-xl bg-gradient-to-r from-[#077989] to-[#10C99C] 
+          px-4 sm:px-12 transition-colors hover:opacity-90"
         >
-          <ChevronLeft className="h-12 w-12    text-black" />
+          <ChevronLeft className="h-8 w-8 sm:h-12 sm:w-12 text-black" />
         </button>
 
+       
         <div className="overflow-hidden" ref={mainCarouselRef}>
           <div className="flex h-full">
             {weatherData.map((data, i) => (
@@ -116,15 +120,36 @@ export function TodayView({ unit }: TodayViewProps) {
 
         <button
           onClick={() => mainCarouselApi?.scrollNext()}
-          className="flex items-center justify-center rounded-xl bg-gradient-to-r from-[#077989] to-[#10C99C] px-20 transition-colors"
+          className="hidden md:flex items-center justify-center rounded-xl bg-gradient-to-r from-[#077989] to-[#10C99C] 
+          px-4 sm:px-12 transition-colors hover:opacity-90"
         >
-          <ChevronRight className="h-12 w-12   text-black " />
+          <ChevronRight className="h-8 w-8 sm:h-12 sm:w-12 text-black" />
         </button>
+
+        <div className="flex justify-center gap-4 md:hidden">
+          <button
+            onClick={() => mainCarouselApi?.scrollPrev()}
+            className="flex items-center justify-center rounded-xl bg-gradient-to-r from-[#077989] to-[#10C99C] 
+            p-2 transition-colors hover:opacity-90"
+          >
+            <ChevronLeft className="h-6 w-6 text-black" />
+          </button>
+          <button
+            onClick={() => mainCarouselApi?.scrollNext()}
+            className="flex items-center justify-center rounded-xl bg-gradient-to-r from-[#077989] to-[#10C99C] 
+            p-2 transition-colors hover:opacity-90"
+          >
+            <ChevronRight className="h-6 w-6 text-black" />
+          </button>
+        </div>
       </div>
 
-      <div className="p-4 bg-zinc-800/30">
-        <div className="overflow-hidden" ref={timelineCarouselRef}>
-          <div className="flex gap-4">
+      <div className="mt-4 sm:mt-6 bg-[#1e1e1e] p-4">
+        <div
+          className="overflow-hidden gap-4 sm:gap-8"
+          ref={timelineCarouselRef}
+        >
+          <div className="flex gap-2 sm:gap-4">
             {timelineData.map((slot, i) => (
               <TimelineCard key={i} {...slot} />
             ))}
