@@ -68,9 +68,9 @@ export const getWeatherByCity = async (
     city: data.name,
     temp,
     humidity: data.main.humidity,
-    visibility: Math.round(data.visibility / 1000), // Convert to km
+    visibility: Math.round(data.visibility / 1000),
     pressure: data.main.pressure,
-    wind: Math.round(data.wind.speed * 2.237), // Convert to mph
+    wind: Math.round(data.wind.speed * 2.237),
     icon: getWeatherIcon(data.weather[0].icon),
     date: new Date().toLocaleDateString("en-US", {
       month: "short",
@@ -116,7 +116,6 @@ export const getDailyForecast = async (city: string, unit: string = "C") => {
   );
 
   if (!response.ok) {
-    // If the daily API fails, fall back to the regular forecast API
     const regularForecast = await fetch(
       `${BASE_URL}/forecast?q=${city}&appid=${API_KEY}`
     );
@@ -127,7 +126,6 @@ export const getDailyForecast = async (city: string, unit: string = "C") => {
 
     const data = await regularForecast.json();
 
-    // Group forecast by day and get min/max temperatures
     const dailyData = data.list.reduce((acc: any[], item: any) => {
       const date = new Date(item.dt * 1000).toLocaleDateString();
       const existing = acc.find((d: any) => d.date === date);
