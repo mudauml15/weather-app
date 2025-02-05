@@ -23,7 +23,9 @@ export function Header({
         <div className="flex items-center flex-col w-60">
           <div className="text-5xl mt-6">WeatherMe </div>
 
-          <div className="text-2xl text-white text-right w-60">21:00 pm</div>
+          <div className="text-1xl font-bold text-white text-right w-60">
+            21:00 pm
+          </div>
         </div>
         <nav className="flex gap-8 text-2xl ">
           {["today", "tomorrow", "monthly"].map((view) => (

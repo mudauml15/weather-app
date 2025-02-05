@@ -11,7 +11,6 @@ interface WeatherCardProps {
 
 export function WeatherCard({ location, unit }: WeatherCardProps) {
   return (
-    // <Card className="h-96 bg-gradient-to-r from-[#AD36CB] to-[#333333] border-4 border-none  p-5 text-center rounded-3xl relative">
     <Card className="h-96 w-full md:w-5/5 lg:w-2/2 xl:w-3/3 bg-gradient-to-r from-[#AD36CB] to-[#333333] border-4 border-none p-5 text-center rounded-3xl relative">
       <div className="w-full flex flex-col ">
         <div className="flex items-center gap-2 mb-8 mt-8">
@@ -24,7 +23,7 @@ export function WeatherCard({ location, unit }: WeatherCardProps) {
             {location.temp}°{unit}
           </div>
           <div className="text-6xl">{location.icon}</div>
-          <div className="text-sm absolute left-2 bottom-0">
+          <div className="text-sm absolute  left-2 bottom-0">
             {location.date}
           </div>
         </div>

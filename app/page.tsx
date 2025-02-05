@@ -11,6 +11,15 @@ import { MonthlyView } from "@/components/weather/MonthlyView";
 export default function Home() {
   const [unit, setUnit] = useState("C");
   const [activeView, setActiveView] = useState("today");
+  const [selectedCity, setSelectedCity] = useState("Pretoria,ZA");
+
+
+  const handleSearch = (city: string) => {
+    
+    const formattedCity = city.includes(",") ? city : `${city},ZA`;
+    setSelectedCity(formattedCity);
+  };
+
 
   return (
     <main className="h-screen bg-[#1E1E1E] text-white flex flex-col">
@@ -46,11 +55,11 @@ export default function Home() {
             </span>
           </div>
         </div>
-        <SearchBar />
+        <SearchBar onSearch={handleSearch} />
         <div className="flex-1">
-          {activeView === "today" && <TodayView unit={unit} />}
+        {activeView === "today" && <TodayView unit={unit} selectedCity={selectedCity} />}
           {activeView === "tomorrow" && <TomorrowView unit={unit} />}
-          {activeView === "monthly" && <MonthlyView />}
+          {/* {activeView === "monthly" && <MonthlyView selectedCity={selectedCity} />} */}
         </div>
       </div>
     </main>

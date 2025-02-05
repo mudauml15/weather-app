@@ -6,6 +6,7 @@ interface TomorrowViewProps {
   unit: string;
 }
 
+
 export function TomorrowView({ unit }: TomorrowViewProps) {
   return (
     <Card className="p-8 border-none rounded-xl">
