@@ -59,7 +59,7 @@ export default function Home() {
         <div className="flex-1">
         {activeView === "today" && <TodayView unit={unit} selectedCity={selectedCity} />}
           {activeView === "tomorrow" && <TomorrowView unit={unit} />}
-          {/* {activeView === "monthly" && <MonthlyView selectedCity={selectedCity} />} */}
+          {activeView === "monthly" && <MonthlyView selectedCity={selectedCity} />}
         </div>
       </div>
     </main>
